@@ -40,12 +40,6 @@ public class GroupImpl implements GroupAble {
         for (int i = 0; i < DataBase.groups.length; i++) {
             if (nameGroup.equalsIgnoreCase(DataBase.groups[i].getGroupName())) {
                 System.out.println(DataBase.groups[i]);
-            } else {
-                try {
-                    System.out.println(2 / 0);
-                } catch (ArithmeticException e) {
-                    System.out.println("Группанын атын Туура эмес жаздыныз");
-                }
             }
         }
     }
@@ -57,17 +51,14 @@ public class GroupImpl implements GroupAble {
         for (int i = 0; i < DataBase.groups.length; i++) {
             if (nameGroup.equalsIgnoreCase(DataBase.groups[i].getGroupName())) {
                 System.out.print("Группага жаны ат жазыныз: ");
-                DataBase.groups[i].setGroupName(new Scanner(System.in).nextLine());
-                if (DataBase.groups[i].getGroupName().length() > 2) {
-                    System.out.println(DataBase.groups[i]);
-                    System.out.println("Группанын аты ийгиликтуу озгорду");
-                }
-            } else {
-                try {
-                    System.out.println(2 / 0);
-                } catch (ArithmeticException e) {
-                    System.out.println("Группанын атын Туура эмес жаздыныз");
-                }
+                String groupName = new Scanner(System.in).nextLine();
+                if (checkingUniqueness(groupName).equalsIgnoreCase("1")){
+                    DataBase.groups[i].setGroupName(groupName);
+                    if (DataBase.groups[i].getGroupName().length() > 2) {
+                        System.out.println(DataBase.groups[i]);
+                        System.out.println("Группанын аты ийгиликтуу озгорду");
+                    }
+                } else System.out.println("Кайталап жазганы болбойт");
             }
         }
     }
@@ -80,12 +71,6 @@ public class GroupImpl implements GroupAble {
             if (DataBase.groups[i].getGroupName().equalsIgnoreCase(nameGroup)) {
                 for (int j = i; j < DataBase.groups.length - 1; j++) {
                     DataBase.groups[j] = DataBase.groups[j + 1];
-                }
-            }else {
-                try {
-                    System.out.println(2 / 0);
-                } catch (ArithmeticException e) {
-                    System.out.println("Группанын атын Туура эмес жаздыныз");
                 }
             }
         }
