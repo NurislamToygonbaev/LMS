@@ -15,11 +15,16 @@ public class AdminImpl implements AdminAble {
         String email = scanner.nextLine();
         System.out.print("Пароль жазыныз: ");
         String password = scanner.nextLine();
-
+        try {
         if (email.equals(admin.getEmail()) && password.equals(admin.getPassword())){
             return admin;
         }
-        System.err.println("Incorrect email ot password!");
+        else {
+            throw new Exception("Туура эмес логин же пароль");
+        }
+        } catch (Exception e) {
+            System.out.println(e.getMessage());
+        }
         return null;
     }
 

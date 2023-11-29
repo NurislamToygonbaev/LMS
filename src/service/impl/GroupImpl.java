@@ -13,17 +13,32 @@ public class GroupImpl implements GroupAble {
         Scanner scanner = new Scanner(System.in);
         Group group = new Group();
         while (true) {
-            System.out.print("Жаны группага ат жазыныз: ");
-            String groupName = scanner.nextLine();
-            if (checkingUniqueness(groupName).equalsIgnoreCase("1") && groupName.length() > 2) {
-                group.setGroupName(groupName);
-                break;
+            try {
+                System.out.print("Жаны группага ат жазыныз: ");
+                String groupName = scanner.nextLine();
+                if (checkingUniqueness(groupName).equalsIgnoreCase("1") && groupName.length() > 2) {
+                    group.setGroupName(groupName);
+                    break;
+                } else {
+                    throw new Exception("туура эмес жаздыныз");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
             }
         }
-        do {
-            System.out.print("Группанын суроттомосуну жазыныз: ");
-            group.setGroupDescription(scanner.nextLine());
-        } while (group.getGroupDescription().length() <= 4);
+        while (true) {
+            try {
+                System.out.print("Группанын суроттомосуну жазыныз: ");
+                group.setGroupDescription(scanner.nextLine());
+                if (group.getGroupDescription().length() >= 4) {
+                    break;
+                } else {
+                    throw new Exception("туура эмес жаздыныз");
+                }
+            } catch (Exception e) {
+                System.out.println(e.getMessage());
+            }
+        }
         group.setId(MyGeneratorId.Generator());
         DataBase.groups = Arrays.copyOf(DataBase.groups, DataBase.groups.length + 1);
         DataBase.groups[DataBase.groups.length - 1] = group;
@@ -52,7 +67,7 @@ public class GroupImpl implements GroupAble {
             if (nameGroup.equalsIgnoreCase(DataBase.groups[i].getGroupName())) {
                 System.out.print("Группага жаны ат жазыныз: ");
                 String groupName = new Scanner(System.in).nextLine();
-                if (checkingUniqueness(groupName).equalsIgnoreCase("1")){
+                if (checkingUniqueness(groupName).equalsIgnoreCase("1")) {
                     DataBase.groups[i].setGroupName(groupName);
                     if (DataBase.groups[i].getGroupName().length() > 2) {
                         System.out.println(DataBase.groups[i]);

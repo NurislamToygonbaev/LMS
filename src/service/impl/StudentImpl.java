@@ -19,35 +19,77 @@ public class StudentImpl implements StudentAble {
             if (name.equalsIgnoreCase(DataBase.groups[i].getGroupName())) {
                 Student student = new Student();
                 student.setId(MyGeneratorId.GeneratorForStudent());
-                do {
-                    System.out.print("Студенттин атыны жазыныз: ");
-                    student.setFirstName(scanForSTR.nextLine());
-                } while (student.getFirstName().length() <= 1);
-                do {
-                    System.out.print("Студенттин фамилиясыны жазыныз: ");
-                    student.setLastName(scanForSTR.nextLine());
-                } while (student.getLastName().length() <= 1);
                 while (true) {
-                    System.out.print("Логин жазыныз: ");
-                    String log = scanForSTR.nextLine();
-                    if (checkingUniqueness(log).equalsIgnoreCase("1") && log.endsWith("@gmail.com")) {
-                        student.setEmail(log);
-                        break;
+                    try {
+                        System.out.print("Студенттин атыны жазыныз: ");
+                        student.setFirstName(scanForSTR.nextLine());
+                        if (student.getFirstName().length() > 1) {
+                            break;
+                        } else {
+                            throw new Exception("туура эмес жаздыныз");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 }
-                do {
-                    System.out.print("Пароль жазыныз: ");
-                    student.setPassword(scanForSTR.nextLine());
-                } while (student.getPassword().length() <= 7);
+                ;
+                while (true) {
+                    try {
+                        System.out.print("Студенттин фамилиясыны жазыныз: ");
+                        student.setLastName(scanForSTR.nextLine());
+                        if (student.getLastName().length() > 1) {
+                            break;
+                        } else {
+                            throw new Exception("туура эмес жаздыныз");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                ;
+                while (true) {
+                    try {
+                        System.out.print("Логин жазыныз: ");
+                        String log = scanForSTR.nextLine();
+                        if (checkingUniqueness(log).equalsIgnoreCase("1") && log.endsWith("@gmail.com")) {
+                            student.setEmail(log);
+                            break;
+                        } else {
+                            throw new Exception("Логин ди туура эмес жаздыныз. @gmail.com камтыш керек");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                while (true) {
+                    try {
+                        System.out.print("Пароль жазыныз: ");
+                        student.setPassword(scanForSTR.nextLine());
+                        if (student.getPassword().length() >= 7) {
+                            break;
+                        } else {
+                            throw new Exception("Пароль ду туура эмес жаздыныз. 7 символдон кем болбосун");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
+                    }
+                }
+                ;
                 while (true) {
                     System.out.print("Жынысын жазыныз: (MALE/FEMALE): ");
                     String gender = (new Scanner(System.in).next());
-                    if (gender.equalsIgnoreCase("male")) {
-                        student.setGender(Gender.MALE);
-                        break;
-                    } else if (gender.equalsIgnoreCase("female")) {
-                        student.setGender(Gender.FEMALE);
-                        break;
+                    try {
+                        if (gender.equalsIgnoreCase("male")) {
+                            student.setGender(Gender.MALE);
+                            break;
+                        } else if (gender.equalsIgnoreCase("female")) {
+                            student.setGender(Gender.FEMALE);
+                            break;
+                        } else {
+                            throw new Exception("жыныс только (MALE/FEMALE) камтыш керек");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 }
                 DataBase.groups[i].students = Arrays.copyOf(DataBase.groups[i].students, DataBase.groups[i].students.length + 1);
@@ -101,7 +143,7 @@ public class StudentImpl implements StudentAble {
     public void deleteStudent() {
         System.out.print("Студенттин email жазыныз: ");
         String email = new Scanner(System.in).nextLine();
-        if (email.endsWith("@gmail.com")){
+        if (email.endsWith("@gmail.com")) {
             for (int i = 0; i < DataBase.groups.length; i++) {
                 for (int j = i; j < DataBase.groups[i].students.length - 1; j++) {
                     if (DataBase.groups[i].students[j].getEmail().equalsIgnoreCase(email)) {

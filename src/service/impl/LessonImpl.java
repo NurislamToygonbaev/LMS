@@ -21,17 +21,29 @@ public class LessonImpl implements LessonAble {
                 while (true) {
                     System.out.print("Сабактын атын жазыныз: ");
                     String nameLesson = scanForSTR.nextLine();
-                    if (nameLesson.length() >= 3) {
-                        lesson.setNameLesson(nameLesson);
-                        break;
+                    try {
+                        if (nameLesson.length() >= 3) {
+                            lesson.setNameLesson(nameLesson);
+                            break;
+                        } else {
+                            throw new Exception("Сабактын атын туура эмес жаздыныз");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 }
                 while (true) {
                     System.out.print("Тапшырманын суроттомосуну жазыныз: ");
                     String lessonDes = scanForSTR.nextLine();
-                    if (lessonDes.length() >= 7) {
-                        lesson.setDescriptionLesson(lessonDes);
-                        break;
+                    try {
+                        if (lessonDes.length() >= 7) {
+                            lesson.setDescriptionLesson(lessonDes);
+                            break;
+                        } else {
+                            throw new Exception("Тапшырманын суроттомосуну туура эмес жаздыныз");
+                        }
+                    } catch (Exception e) {
+                        System.out.println(e.getMessage());
                     }
                 }
                 DataBase.groups[i].lessons = Arrays.copyOf(DataBase.groups[i].lessons, DataBase.groups[i].lessons.length + 1);
