@@ -2,8 +2,8 @@ package Models;
 
 public class Admin {
     private String fullName = "Toigonbaev Nurislam";
-    private String email = "Admin@outlook.com";
-    private String password = "admin123";
+    private String email = "Admin@outlook";
+    private String password = "Admin123";
 
     public String getFullName() {
         return fullName;

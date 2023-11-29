@@ -49,7 +49,13 @@ public class LessonImpl implements LessonAble {
             for (int j = 0; j < DataBase.groups[i].lessons.length; j++) {
                 if (DataBase.groups[i].lessons[j].getNameLesson().equalsIgnoreCase(nameLessons)) {
                     System.out.println(DataBase.groups[i].lessons[j]);
-                } else System.out.println("Туура эмес жаздыныз");
+                } else {
+                    try {
+                        System.out.println(2 / 0);
+                    } catch (ArithmeticException e) {
+                        System.out.println("Сабактын атын Туура эмес жаздыныз");
+                    }
+                }
             }
         }
     }
@@ -61,7 +67,13 @@ public class LessonImpl implements LessonAble {
         for (int i = 0; i < DataBase.groups.length; i++) {
             if (DataBase.groups[i].getGroupName().equalsIgnoreCase(nameGroup)) {
                 System.out.println(Arrays.toString(DataBase.groups[i].lessons));
-            } else System.out.println("Туура эмес жаздыныз");
+            } else {
+                try {
+                    System.out.println(2 / 0);
+                } catch (ArithmeticException e) {
+                    System.out.println("Группанын атын Туура эмес жаздыныз");
+                }
+            }
         }
     }
 
@@ -69,16 +81,20 @@ public class LessonImpl implements LessonAble {
     public void deleteLessonById() {
         System.out.print("Сабактын ID син Жазыныз: ");
         long idScan = new Scanner(System.in).nextLong();
-        if (idScan > 0){
-            for (int i = 0; i < DataBase.groups.length; i++) {
-                for (int j = i; j < DataBase.groups[i].lessons.length - 1; j++) {
-                    if (DataBase.groups[i].lessons[j].getId() == idScan) {
-                        DataBase.groups[i].lessons[j] = DataBase.groups[i].lessons[j + 1];
+        for (int i = 0; i < DataBase.groups.length; i++) {
+            for (int j = i; j < DataBase.groups[i].lessons.length - 1; j++) {
+                if (DataBase.groups[i].lessons[j].getId() == idScan) {
+                    DataBase.groups[i].lessons[j] = DataBase.groups[i].lessons[j + 1];
+                } else {
+                    try {
+                        System.out.println(2 / 0);
+                    } catch (ArithmeticException e) {
+                        System.out.println("Сабактын ID син Туура эмес жаздыныз");
                     }
                 }
-                System.out.println("Сабак ийгиликтуу очурулду!");
-                DataBase.groups[i].setLessons(Arrays.copyOf(DataBase.groups[i].lessons, DataBase.groups[i].lessons.length - 1));
             }
-        }else System.out.println("ID ни туура жазыныз");
+            System.out.println("Сабак ийгиликтуу очурулду!");
+            DataBase.groups[i].setLessons(Arrays.copyOf(DataBase.groups[i].lessons, DataBase.groups[i].lessons.length - 1));
+        }
     }
 }

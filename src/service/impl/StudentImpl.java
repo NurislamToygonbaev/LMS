@@ -68,6 +68,12 @@ public class StudentImpl implements StudentAble {
                     System.out.print("Студенттин жаны атын жазыныз: ");
                     DataBase.groups[i].students[j].setFirstName(scanner.nextLine());
                     System.out.println("Студенттин аты ийгиликтуу озгорду");
+                } else {
+                    try {
+                        System.out.println(2 / 0);
+                    } catch (ArithmeticException e) {
+                        System.out.println("Студенттин email Туура эмес жаздыныз");
+                    }
                 }
             }
         }
@@ -81,6 +87,12 @@ public class StudentImpl implements StudentAble {
             for (int j = 0; j < DataBase.groups[i].students.length; j++) {
                 if (DataBase.groups[i].students[j].getFirstName().equalsIgnoreCase(name)) {
                     System.out.println(DataBase.groups[i].students[j]);
+                } else {
+                    try {
+                        System.out.println(2 / 0);
+                    } catch (ArithmeticException e) {
+                        System.out.println("Студенттин атын Туура эмес жаздыныз");
+                    }
                 }
             }
         }
@@ -93,6 +105,12 @@ public class StudentImpl implements StudentAble {
         for (int i = 0; i < DataBase.groups.length; i++) {
             if (DataBase.groups[i].getGroupName().equalsIgnoreCase(groupName)) {
                 System.out.println(Arrays.toString(DataBase.groups[i].getStudents()));
+            }else {
+                try {
+                    System.out.println(2 / 0);
+                } catch (ArithmeticException e) {
+                    System.out.println("Группанын атын Туура эмес жаздыныз");
+                }
             }
         }
     }
@@ -116,13 +134,19 @@ public class StudentImpl implements StudentAble {
 
     @Override
     public void getALlLessonsStudent() {
-        System.out.print("Студенттин атын Жазыныз: ");
-        String nameStudent = new Scanner(System.in).nextLine();
+        System.out.print("Студенттин ID син Жазыныз: ");
+        long nameStudent = new Scanner(System.in).nextLong();
         for (int i = 0; i < DataBase.groups.length; i++) {
             for (int j = 0; j < DataBase.groups[i].students.length; j++) {
-                if (DataBase.groups[i].students[j].getFirstName().equalsIgnoreCase(nameStudent)) {
+                if (DataBase.groups[i].students[j].getId() == nameStudent) {
                     for (int k = 0; k < DataBase.groups[i].lessons.length; k++) {
                         System.out.println(DataBase.groups[i].lessons[k]);
+                    }
+                } else {
+                    try {
+                        System.out.println(2 / 0);
+                    } catch (ArithmeticException e) {
+                        System.out.println("Студенттин ID Туура эмес жаздыныз");
                     }
                 }
             }

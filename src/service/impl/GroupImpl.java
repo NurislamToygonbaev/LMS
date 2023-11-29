@@ -34,11 +34,18 @@ public class GroupImpl implements GroupAble {
 
     @Override
     public void getGroupByName() {
+        Scanner scanner = new Scanner(System.in);
         System.out.print("Группанын атын Жазыныз: ");
-        String nameGroup = new Scanner(System.in).nextLine();
+        String nameGroup = scanner.nextLine();
         for (int i = 0; i < DataBase.groups.length; i++) {
             if (nameGroup.equalsIgnoreCase(DataBase.groups[i].getGroupName())) {
                 System.out.println(DataBase.groups[i]);
+            } else {
+                try {
+                    System.out.println(2 / 0);
+                } catch (ArithmeticException e) {
+                    System.out.println("Группанын атын Туура эмес жаздыныз");
+                }
             }
         }
     }
@@ -48,11 +55,19 @@ public class GroupImpl implements GroupAble {
         System.out.print("Группанын атын Жазыныз: ");
         String nameGroup = new Scanner(System.in).nextLine();
         for (int i = 0; i < DataBase.groups.length; i++) {
-            if (nameGroup.equalsIgnoreCase(DataBase.groups[i].getGroupName())){
+            if (nameGroup.equalsIgnoreCase(DataBase.groups[i].getGroupName())) {
                 System.out.print("Группага жаны ат жазыныз: ");
                 DataBase.groups[i].setGroupName(new Scanner(System.in).nextLine());
-                System.out.println(DataBase.groups[i]);
-                System.out.println("Группанын аты ийгиликтуу озгорду");
+                if (DataBase.groups[i].getGroupName().length() > 2) {
+                    System.out.println(DataBase.groups[i]);
+                    System.out.println("Группанын аты ийгиликтуу озгорду");
+                }
+            } else {
+                try {
+                    System.out.println(2 / 0);
+                } catch (ArithmeticException e) {
+                    System.out.println("Группанын атын Туура эмес жаздыныз");
+                }
             }
         }
     }
@@ -62,14 +77,20 @@ public class GroupImpl implements GroupAble {
         System.out.print("Группанын атын Жазыныз: ");
         String nameGroup = new Scanner(System.in).nextLine();
         for (int i = 0; i < DataBase.groups.length; i++) {
-            if (DataBase.groups[i].getGroupName().equalsIgnoreCase(nameGroup)){
-                for (int j = i; j < DataBase.groups.length -1; j++) {
-                    DataBase.groups[j] = DataBase.groups[j +1];
+            if (DataBase.groups[i].getGroupName().equalsIgnoreCase(nameGroup)) {
+                for (int j = i; j < DataBase.groups.length - 1; j++) {
+                    DataBase.groups[j] = DataBase.groups[j + 1];
+                }
+            }else {
+                try {
+                    System.out.println(2 / 0);
+                } catch (ArithmeticException e) {
+                    System.out.println("Группанын атын Туура эмес жаздыныз");
                 }
             }
         }
         System.out.println("Группа ийгиликтуу очурулду!!!");
-        return Arrays.copyOf(DataBase.groups, DataBase.groups.length -1);
+        return Arrays.copyOf(DataBase.groups, DataBase.groups.length - 1);
     }
 
 
